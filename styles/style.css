@@ -1,18 +1,28 @@
 * {
-
+    padding: 0;
+    margin: 0;
 }
 body{
-
+    font-family: monospace;
+    width: 100%;
 }
 main{
-
+    background-color: aqua;
+    
+    margin: 2em 4em;
 }
 .title-container{
+    text-align: center;
 
+    padding: 1em;
 }
 .title-text{
+    font-size: 50px;
 
+    padding-bottom: 0.5em;
 }
 .subtitle-text{
-    
+    font-size: 21px;
+
+    padding-bottom: 2em;
 }
