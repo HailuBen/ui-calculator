@@ -5,11 +5,16 @@
 body{
     font-family: 'Courier New', Courier, monospace;
     width: 100%;
+    background-color: rgb(54, 54, 54);
+    text-align: center;
 }
 main{
+    display: inline-block;
     background-color: aqua;
     
-    margin: 2em 4em;
+    width: fit-content;
+    margin: 5% 0;
+    padding: 2em;
 }
 
 /* |TITLES| */
@@ -35,7 +40,7 @@ main{
     display: flex;
     justify-content: center;
     text-align: center;
-    margin: 0 20%;
+    padding: 10px;
 
     background-color: green;
     border: aquamarine;
@@ -45,14 +50,16 @@ button{
   font-family: 'Courier New', Courier, monospace;
   font-weight: 600;
 
-  padding: 6px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
 }
 .buttons-container{
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr;
     
-    gap: 6px;
+    gap: 9px;
     padding: 0 10px;
 }
 .operation-button{
