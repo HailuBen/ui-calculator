@@ -51,8 +51,21 @@ button{
   font-weight: 600;
 
   padding: 6px 12px;
+
+  background-color: white;
   border-radius: 5px;
-  border: none;
+  border: 1px solid white;
+
+  cursor: pointer;
+  transition:background-color .2s;
+}
+button:hover{
+    background-color: rgb(211, 211, 211);
+    border-color: rgb(211, 211, 211);
+}
+button:active{
+    transform: translateY(2px);
+    border: 1px solid gray;
 }
 .buttons-container{
     display: grid;
