@@ -54,7 +54,7 @@ button{
 
   background-color: white;
   border-radius: 5px;
-  border: 1px solid white;
+  border: 1px solid rgb(211, 211, 211);
 
   cursor: pointer;
   transition:background-color .2s;
