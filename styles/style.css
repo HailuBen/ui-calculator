@@ -26,3 +26,22 @@ main{
 
     padding-bottom: 2em;
 }
+
+.calc-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+
+    background-color: green;
+    border: aquamarine;
+}
+.buttons-container{
+
+}
+.operation-button{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+
+    padding: 4px;
+}
