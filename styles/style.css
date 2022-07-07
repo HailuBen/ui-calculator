@@ -35,17 +35,33 @@ main{
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 50%;
+    margin: 0 20%;
 
     background-color: green;
     border: aquamarine;
 }
 .buttons-container{
-
+    display: flex;
+    flex-direction: column-reverse;
+    
+    gap: 6px;
 }
 .operation-button{
     font-family: 'Courier New', Courier, monospace;
     font-weight: 600;
 
-    padding: 4px;
+    padding: 6px;
+}
+.numbers-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    gap: 3px;
+}
+.number-button{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+
+    padding: 6px;
 }
