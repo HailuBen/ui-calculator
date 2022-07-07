@@ -47,23 +47,16 @@ button{
 
   padding: 6px;
 }
-.operations-container{
-    display: flex;
-    flex-direction: column-reverse;
+.buttons-container{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     
     gap: 6px;
     padding: 0 10px;
 }
 .operation-button{
 
-}
-.numbers-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-
-
-    gap: 6px;
 }
 .number-button{
 
