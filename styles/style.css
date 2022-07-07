@@ -40,28 +40,31 @@ main{
     background-color: green;
     border: aquamarine;
 }
-.buttons-container{
+button{
+  font-size: 31px; 
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+
+  padding: 6px;
+}
+.operations-container{
     display: flex;
     flex-direction: column-reverse;
     
     gap: 6px;
+    padding: 0 10px;
 }
 .operation-button{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 600;
 
-    padding: 6px;
 }
 .numbers-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 
-    gap: 3px;
+
+    gap: 6px;
 }
 .number-button{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 600;
 
-    padding: 6px;
 }
