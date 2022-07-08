@@ -18,8 +18,6 @@ function setUpEvents(){
     // });
     // console.log(add, subtract, multiply, divide);
 
-    const btns = document.querySelectorAll('button');
-
     // NUMBERS
     const btn1 = document.getElementById('1');
     const btn2 = document.getElementById('2');
@@ -45,6 +43,11 @@ function setUpEvents(){
     // DISPLAY
     const numberDisplay = document.querySelector('.display-text');
     numberDisplay.innerHTML+="suka la mink";
+
+    // EVENT LISTENER
+    document.querySelectorAll('button').forEach(el => el.addEventListener('click', function(){
+        console.log(this.value);
+    }));
 
 }   
 window.onload = function(){
