@@ -18,6 +18,8 @@ function setUpEvents(){
     // });
     // console.log(add, subtract, multiply, divide);
 
+    const btns = document.querySelectorAll('button');
+
     // NUMBERS
     const btn1 = document.getElementById('1');
     const btn2 = document.getElementById('2');
