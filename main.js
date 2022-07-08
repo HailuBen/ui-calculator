@@ -29,13 +29,11 @@ function setUpEvents(){
     const btn8 = document.getElementById('8');
     const btn9 = document.getElementById('9');
     const btn0 = document.getElementById('0');
-
     // OPERATORS
     const addBtn = document.getElementById('+');
     const subtractBtn = document.getElementById('-');
     const multiplyBtn = document.getElementById('*');
     const divideBtn = document.getElementById('/');
-
     // DECIMAL, EQUALS
     const decimalBtn = document.getElementById('decimal');
     const equalsBtn = document.getElementById('equals');
@@ -46,7 +44,8 @@ function setUpEvents(){
 
     // EVENT LISTENER
     document.querySelectorAll('button').forEach(el => el.addEventListener('click', function(){
-        console.log(this.value);
+        let btnValue = this.value;
+        console.log(btnValue);
     }));
 
 }   
