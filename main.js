@@ -21,7 +21,7 @@ function setUpEvents(){
     // Variables
     let btnValue=0;
     let clicked = false;
-    let numberString = [];
+    let numberArr = [];
 
     // NUMBERS
     const btn1 = document.getElementById('1');
@@ -46,20 +46,20 @@ function setUpEvents(){
     const numberDisplay = document.querySelector('.display-text');
     // numberDisplay.innerHTML+="suka la mink";
     // EVENT LISTENER
-    document.querySelectorAll('button').forEach(el => el.addEventListener('click', function(){
+    document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function(){
         clicked = true;
         btnValue = this.value;
         // console.log(btnValue);
         numberDisplay.innerHTML+=btnValue;
+        getEquation();
         clicked = false;
     }));
 
     // FUNCTIONS
     function getEquation(){
-        if (clicked = true && btnValue!== '='){
-            if (isNaN(btnValue)){
-                console.log(true);
-            }
+        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-'){
+            numberArr.push(btnValue);
+            console.log(numberArr);
         }
     }
 
