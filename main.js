@@ -18,7 +18,10 @@ function setUpEvents(){
     // });
     // console.log(add, subtract, multiply, divide);
 
+    // Variables
     let btnValue=0;
+    let clicked = false;
+    let numberString = [];
 
     // NUMBERS
     const btn1 = document.getElementById('1');
@@ -44,10 +47,21 @@ function setUpEvents(){
     // numberDisplay.innerHTML+="suka la mink";
     // EVENT LISTENER
     document.querySelectorAll('button').forEach(el => el.addEventListener('click', function(){
+        clicked = true;
         btnValue = this.value;
         // console.log(btnValue);
         numberDisplay.innerHTML+=btnValue;
+        clicked = false;
     }));
+
+    // FUNCTIONS
+    function getEquation(){
+        if (clicked = true && btnValue!== '='){
+            if (isNaN(btnValue)){
+                console.log(true);
+            }
+        }
+    }
 
 }   
 window.onload = function(){
