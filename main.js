@@ -18,6 +18,8 @@ function setUpEvents(){
     // });
     // console.log(add, subtract, multiply, divide);
 
+    let btnValue=0;
+
     // NUMBERS
     const btn1 = document.getElementById('1');
     const btn2 = document.getElementById('2');
@@ -37,15 +39,14 @@ function setUpEvents(){
     // DECIMAL, EQUALS
     const decimalBtn = document.getElementById('decimal');
     const equalsBtn = document.getElementById('equals');
-
     // DISPLAY
     const numberDisplay = document.querySelector('.display-text');
-    numberDisplay.innerHTML+="suka la mink";
-
+    // numberDisplay.innerHTML+="suka la mink";
     // EVENT LISTENER
     document.querySelectorAll('button').forEach(el => el.addEventListener('click', function(){
-        let btnValue = this.value;
-        console.log(btnValue);
+        btnValue = this.value;
+        // console.log(btnValue);
+        numberDisplay.innerHTML+=btnValue;
     }));
 
 }   
