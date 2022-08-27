@@ -18,7 +18,7 @@ function setUpEvents(){
     // });
     // console.log(add, subtract, multiply, divide);
 
-    // Variables
+    // VARIABLES
     let btnValue=0;
     let clicked = false;
     let numberArr = [];
@@ -64,6 +64,45 @@ function setUpEvents(){
             numberArr.push(btnValue);
             console.log(numberArr);  
         }
+        else{
+            operate();
+        }
+    }
+
+    function operate(){
+        if (btnValue == '+'){
+            add();
+        }
+        else if(btnValue == '-'){
+            subtract();
+        }
+        else if(btnValue == '/'){
+            divide();
+        }
+        else if(btnValue == '*'){
+            multiply();
+        }
+    }
+
+    function add() {
+        numbers.reduce((accumulator, currentValue)=>{
+            return accumulator+currentValue;
+        },0);
+    }
+    function subtract() {
+        numbers.reduce((a, b) => {
+            return a-b;
+        });
+    }
+    function multiply() {
+        numbers.reduce((a, b) => {
+            return a*b;
+        });
+    }
+    function divide() {
+        numbers.reduce((a, b) => {
+            return a/b;
+        });
     }
 
 }   
