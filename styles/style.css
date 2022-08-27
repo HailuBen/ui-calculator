@@ -100,3 +100,7 @@ button:active{
 .number-button{
 
 }
+
+.clear-button{    
+    margin: 10px;
+}
