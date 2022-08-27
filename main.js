@@ -22,6 +22,7 @@ function setUpEvents(){
     let btnValue=0;
     let clicked = false;
     let numberArr = [];
+    let counter = 0;
 
     // NUMBERS
     const btn1 = document.getElementById('1');
@@ -44,13 +45,15 @@ function setUpEvents(){
     const equalsBtn = document.getElementById('equals');
     // DISPLAY
     const numberDisplay = document.querySelector('.display-text');
-    // numberDisplay.innerHTML+="suka la mink";
     // EVENT LISTENER
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function(){
         clicked = true;
         btnValue = this.value;
         // console.log(btnValue);
-        numberDisplay.innerHTML+=btnValue;
+        if (counter<12){
+            numberDisplay.innerHTML+=btnValue;
+            counter++;
+        }
         getEquation();
         clicked = false;
     }));
@@ -59,7 +62,7 @@ function setUpEvents(){
     function getEquation(){
         if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-'){
             numberArr.push(btnValue);
-            console.log(numberArr);
+            console.log(numberArr);  
         }
     }
 
