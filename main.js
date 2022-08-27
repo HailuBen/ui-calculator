@@ -40,6 +40,8 @@ function setUpEvents(){
     const subtractBtn = document.getElementById('-');
     const multiplyBtn = document.getElementById('*');
     const divideBtn = document.getElementById('/');
+    // CLEAR
+    const clearBtn = document.getElementById('clear');
     // DECIMAL, EQUALS
     const decimalBtn = document.getElementById('decimal');
     const equalsBtn = document.getElementById('equals');
@@ -50,9 +52,13 @@ function setUpEvents(){
         clicked = true;
         btnValue = this.value;
         // console.log(btnValue);
-        if (counter<12){
+        if (counter<12 && btnValue !== 'clear'){
             numberDisplay.innerHTML+=btnValue;
             counter++;
+        }
+        else if (btnValue=='clear'){
+            numberDisplay.innerHTML='';
+            counter=0;
         }
         getEquation();
         clicked = false;
