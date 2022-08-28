@@ -57,6 +57,7 @@ function setUpEvents(){
             counter++;
         }
         else if (btnValue=='clear'){
+            numberArr = [];
             numberDisplay.innerHTML='';
             counter=0;
         }
@@ -66,7 +67,7 @@ function setUpEvents(){
 
     // FUNCTIONS
     function getEquation(){
-        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-'){
+        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-' && btnValue!== 'clear'){
             numberArr.push(btnValue);
             console.log(numberArr);  
         }
