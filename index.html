@@ -6,7 +6,8 @@
         <meta name="description" content="">
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
         <link rel="stylesheet" type="text/css" href="styles/style.css">
-        <script src="main.js"></script>
+        <!-- <script src="main.js"></script> -->
+        <script src="scripts/script.js" defer></script>
         <title>Calculator</title>
     </head>
     <body>
@@ -76,31 +77,32 @@
 
             <div class="calc-container">
                 <div class="display-container">
-                    <h3 class="display-text"></h3>
+                    <h3 data-display-previous class="display-text-previous"></h3>
+                    <h3 data-display-current class="display-text-current"></h3>
                 </div>
 
-                <button id="clear" class="clear-button" value="clear">CLEAR</button>
+                <button data-clear class="clear-button" value="clear">CLEAR</button>
 
                 <div class="buttons-container">
-                    <button id="number" class="number-button" value="7">7</button>
-                    <button id="number" class="number-button" value="8">8</button>
-                    <button id="number" class="number-button" value="9">9</button>
-                    <button id="operation" class="operation-button" value="÷">÷</button>
+                    <button data-number class="number-button" value="7">7</button>
+                    <button data-number class="number-button" value="8">8</button>
+                    <button data-number class="number-button" value="9">9</button>
+                    <button data-operation class="operation-button" value="÷">÷</button>
 
-                    <button id="number" class="number-button" value="4">4</button>
-                    <button id="number" class="number-button" value="5">5</button>
-                    <button id="number" class="number-button" value="6">6</button>
-                    <button id="operation" class="operation-button" value="x">x</button>
+                    <button data-number class="number-button" value="4">4</button>
+                    <button data-number class="number-button" value="5">5</button>
+                    <button data-number class="number-button" value="6">6</button>
+                    <button data-operation class="operation-button" value="x">x</button>
 
-                    <button id="number" class="number-button" value="1">1</button>
-                    <button id="number" class="number-button" value="2">2</button>
-                    <button id="number" class="number-button" value="3">3</button>
-                    <button id="operation" class="operation-button" value="-">-</button>
+                    <button data-number class="number-button" value="1">1</button>
+                    <button data-number class="number-button" value="2">2</button>
+                    <button data-number class="number-button" value="3">3</button>
+                    <button data-operation class="operation-button" value="-">-</button>
 
-                    <button id="number" class="number-button" value="0">0</button>
-                    <button id="decimal" class="decimal-button" value=".">.</button>
-                    <button id="=" class="equals-button" value="=">=</button>
-                    <button id="operation" class="operation-button" value="+">+</button>
+                    <button data-number class="number-button" value="0">0</button>
+                    <button data-number class="decimal-button" value=".">.</button>
+                    <button data-equals class="equals-button" value="=">=</button>
+                    <button data-operation class="operation-button" value="+">+</button>
                 </div>
 
             </div>

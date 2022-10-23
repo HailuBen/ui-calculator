@@ -56,7 +56,7 @@ main{
     font-weight: 600;
 
     width: 282px;
-    height: 44px;
+    height: 60px;
 
     padding: 10px 10px 0;
     margin: 9px;
@@ -64,6 +64,15 @@ main{
     border: 1px solid rgb(211, 211, 211);
     border-radius: 5px;
 }
+.display-text-current {
+    color: white;
+    font-size: 2rem;
+}
+.display-text-previous {
+    color: rgba(255, 255, 255, 0.856);
+    font-size: 1rem;
+}
+
 button{
   font-size: 33px; 
   font-family: 'Courier New', Courier, monospace;
