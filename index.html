@@ -10,6 +10,64 @@
         <title>Calculator</title>
     </head>
     <body>
+
+        <script>
+            let arr = [1,2,3,5];
+
+            // const sum = arr.reduce((accumulator, value) => {
+            //     return accumulator + value;
+            // }, 0);
+            
+            function sum(arr) {
+                return arr.reduce((total, current) => total + current, 0);
+            }
+            
+            arr.push(42);
+
+            console.log(arr);
+
+            console.log(sum(arr));
+
+            arr.push(3,3,4,5);
+
+            console.log(sum(arr));
+
+
+            //doneso
+
+
+            let arr2 = [1,2,3,6];
+            console.log(arr2);
+            arr2 = Number(arr2.join(""));
+            console.log(arr2);
+            //this is how we change the array of buttons pressed from seperate numbers to 1 int.
+            
+
+            //final boss
+            let arr3 = [];
+            arr3.push(4,3,4,1);
+            console.log(arr3);
+            toNum3 = Number(arr3.join(""));
+            console.log(toNum3);
+            // user presses + button
+            let arr4 = [];
+            arr4.push(4,4,2,2);
+            toNum4 = Number(arr4.join(""));
+            console.log(toNum4);
+
+            // let finalArr = [toNum3, toNum4];
+            // function sum(finalArr) {
+            //     return finalArr.reduce((total, current) => total + current, 0);
+            // }
+            // console.log(sum(finalArr));
+
+            console.log(toNum3 + toNum4);
+
+
+
+
+        </script>
+
         <main>
             <div class="title-container">
                 <h1 class="title-text">Calculator</h1>
@@ -27,12 +85,12 @@
                     <button id="7" class="number-button" value="7">7</button>
                     <button id="8" class="number-button" value="8">8</button>
                     <button id="9" class="number-button" value="9">9</button>
-                    <button id="/" class="operation-button" value="/">÷</button>
+                    <button id="/" class="operation-button" value="÷">÷</button>
 
                     <button id="4" class="number-button" value="4">4</button>
                     <button id="5" class="number-button" value="5">5</button>
                     <button id="6" class="number-button" value="6">6</button>
-                    <button id="*" class="operation-button" value="*">x</button>
+                    <button id="*" class="operation-button" value="x">x</button>
 
                     <button id="1" class="number-button" value="1">1</button>
                     <button id="2" class="number-button" value="2">2</button>
