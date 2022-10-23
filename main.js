@@ -67,11 +67,13 @@ function setUpEvents(){
 
     // FUNCTIONS
     function getEquation(){
-        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-' && btnValue!== 'clear'){
+        if (btnValue!== '=' && btnValue!== '÷' && btnValue!== 'x' && btnValue!== '+' && btnValue!== '-' && btnValue!== 'clear'){
             numberArr.push(btnValue);
             console.log(numberArr);  
         }
         else{
+            joinNum = Number(numberArr.join(""));
+            console.log(joinNum);
             operate();
         }
     }
