@@ -1,23 +1,6 @@
 function setUpEvents(){
     numbers = [9,0,2,1,0];
 
-    // const add = numbers.reduce((accumulator, currentValue)=>{
-    //     return accumulator+currentValue;
-    // },0);
-
-    // const subtract = numbers.reduce((a, b) => {
-    //     return a-b;
-    // });
-
-    // const multiply = numbers.reduce((a, b) => {
-    //     return a*b;
-    // });
-
-    // const divide = numbers.reduce((a, b) => {
-    //     return a/b;
-    // });
-    // console.log(add, subtract, multiply, divide);
-
     // Variables
     let btnValue=0;
     let clicked = false;
@@ -34,17 +17,20 @@ function setUpEvents(){
     const btn8 = document.getElementById('8');
     const btn9 = document.getElementById('9');
     const btn0 = document.getElementById('0');
+
     // OPERATORS
     const addBtn = document.getElementById('+');
     const subtractBtn = document.getElementById('-');
     const multiplyBtn = document.getElementById('*');
     const divideBtn = document.getElementById('/');
+
     // DECIMAL, EQUALS
     const decimalBtn = document.getElementById('decimal');
     const equalsBtn = document.getElementById('equals');
+
     // DISPLAY
     const numberDisplay = document.querySelector('.display-text');
-    // numberDisplay.innerHTML+="suka la mink";
+    
     // EVENT LISTENER
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function(){
         clicked = true;

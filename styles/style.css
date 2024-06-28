@@ -5,12 +5,12 @@
 body{
     font-family: 'Courier New', Courier, monospace;
     width: 100%;
-    background-color: rgb(54, 54, 54);
+    background-color: rgb(185, 118, 248);
     text-align: center;
 }
 main{
     display: inline-block;
-    background-color: aqua;
+    background-color: rgb(185, 118, 248);
     
     width: fit-content;
     margin: 5% 0;
@@ -24,14 +24,13 @@ main{
     padding: 1em;
 }
 .title-text{
-    font-size: 50px;
+    font-size: 2rem;
 
-    padding-bottom: 0.5em;
+    /* padding-bottom: 0.5em; */
 }
 .subtitle-text{
-    font-size: 21px;
+    font-size: 1rem;
 
-    padding-bottom: 2em;
 }
 
 
@@ -44,9 +43,10 @@ main{
     padding: 10px;
     padding-bottom: 16px;
 
-    background-color: green;
-    border: aquamarine;
+    background-color: silver;
+    border: 2px solid black;
     border-radius: 10px;
+    box-shadow: 2px 1px 5px;
 }
 .display-container{
     text-align: right;
@@ -61,7 +61,7 @@ main{
     padding: 10px 10px 0;
     margin: 9px;
 
-    border: 1px solid rgb(211, 211, 211);
+    border: 2px solid gray;
     border-radius: 5px;
 }
 button{
@@ -84,7 +84,7 @@ button:hover{
 }
 button:active{
     transform: translateY(2px);
-    border: 1px solid gray;
+    border: 1px solid silver;
 }
 .buttons-container{
     display: grid;
@@ -93,10 +93,4 @@ button:active{
     
     gap: 9px;
     padding: 0 10px;
-}
-.operation-button{
-
-}
-.number-button{
-
-}
+} 
