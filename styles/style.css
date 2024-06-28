@@ -35,11 +35,6 @@ main{
 
 /* |CALCULATOR| */
 .calc-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;     
     padding: 10px;
     padding-bottom: 16px;
 
@@ -47,6 +42,7 @@ main{
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: 2px 1px 5px;
+    width: 100%;
 }
 .display-container{   
     text-align: right;
@@ -55,7 +51,7 @@ main{
     font-family: 'Courier New', Courier, monospace;
     font-weight: 600;
 
-    width: 282px;
+    /* width: 282px; */
     height: 51px;
 
     padding: 10px 10px 0;
