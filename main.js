@@ -29,24 +29,37 @@ function setUpEvents(){
     const equalsBtn = document.getElementById('equals');
 
     // DISPLAY
-    const numberDisplay = document.querySelector('.display-text');
+    const calcDisplay = document.querySelector('.display-text');
+
+    //CLEAR 
+    const clearBtn = document.getElementById('clear');
     
-    // EVENT LISTENER
+    // EVENT LISTENER TO DISPLAY BUTTON PRESS
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function(){
         clicked = true;
         btnValue = this.value;
         // console.log(btnValue);
-        numberDisplay.innerHTML+=btnValue;
+        calcDisplay.innerHTML+=btnValue;
         getEquation();
         clicked = false;
     }));
 
-    // FUNCTIONS
+    // EVENT LISTENER TO CLEAR DISPLAY SCREEN & ARRAY
+    clearBtn.addEventListener("click", clearDisplay);
+
+    
+    // FUNCTION TO SEND NUMBER PRESSED TO ARRAY
     function getEquation(){
-        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-'){
+        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-' && btnValue!== 'clear' && btnValue!== 'delete'){
             numberArr.push(btnValue);
             console.log(numberArr);
         }
+    }
+
+    // CLEAR DISPLAY SCREEN & ARRAY
+    function clearDisplay() {
+        calcDisplay.innerHTML = "";
+        numberArr = [];
     }
 
 }   
