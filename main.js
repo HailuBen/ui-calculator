@@ -1,10 +1,10 @@
-function setUpEvents(){
-    numbers = [9,0,2,1,0];
+function setUpEvents() {
+    numbers = [9, 0, 2, 1, 0];
 
     // Variables
-    let btnValue=0;
+    let btnValue = 0;
     let clicked = false;
-    let x,y;
+    let currentNumber, y;
     let numberArr = [];
 
     // NUMBERS
@@ -29,39 +29,49 @@ function setUpEvents(){
     // DISPLAY TEXT/CHARACTERS/NUMBERS
     const calcDisplay = document.querySelector('.display-text');
     //CLEAR & DELETE
-    const clearBtn = document.getElementById('clear');
-    const deleteBtn = document.getElementById('delete');
-    
+    // const clearBtn = document.getElementById('clear');
+    // const deleteBtn = document.getElementById('delete');
 
-    // EVENT LISTENER TO DISPLAY BUTTON PRESS
-    document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function(){
+
+    // EVENT LISTENER TO ACCEPT AND DISPLAY BUTTON PRESSES
+    document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function () {
         clicked = true;
         btnValue = this.value;
-        // console.log(btnValue);
-        calcDisplay.innerHTML+=btnValue;
-        getEquation();
+        if (btnValue !== 'delete' && btnValue !== 'clear') {
+            calcDisplay.innerHTML += btnValue;
+        }
+
+        if (btnValue == 'clear') {
+            clearDisplay();
+        }
+        else if (btnValue == 'delete') {
+            deleteSpace();
+        }
+
+        getNumber();
         clicked = false;
+
     }));
 
     // EVENT LISTENER TO CLEAR DISPLAY SCREEN & ARRAY
-    clearBtn.addEventListener("click", clearDisplay);
+    // clearBtn.addEventListener("click", clearDisplay);
     // EVENT LISTENER TO DELETE THE PREVIOUS CHARACTER FRON DISPLAY SCREEN & ARRAY
-    deleteBtn.addEventListener("click", deleteSpace);
+    // deleteBtn.addEventListener("click", deleteSpace);
 
-    
+
     // FUNCTION TO GET NUMBER ENTERED INTO DISPLAY & OPERATOR
-    function getEquation(){
-        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-' && btnValue!== 'clear' && btnValue!== 'delete'){
-            x = parseFloat(calcDisplay.innerHTML);
-            console.log(typeof(x)+": "+x);
+    function getNumber() {
+        if (btnValue !== '=' && btnValue !== '/' && btnValue !== '*' && btnValue !== '+' && btnValue !== '-' && btnValue !== 'clear' && btnValue !== 'delete') {
+            currentNumber = parseFloat(calcDisplay.innerHTML);
+            console.log(typeof (currentNumber) + ": " + currentNumber);
         }
     }
 
     // WHEN AN OPERATION IS CLICKED, ADD THE CURRENT DISPLAY NUMBER TO ARRAY FOR OPERATION
-    function operate(){
-        if (btnValue!== '=' && btnValue!== '/' && btnValue!== '*' && btnValue!== '+' && btnValue!== '-' && btnValue!== 'clear' && btnValue!== 'delete'){
-            console.log(typeof(x)+"Current Number: "+x);
-            // numberArr.push(x);
+    function operate() {
+        if (btnValue !== '=' && btnValue !== '/' && btnValue !== '*' && btnValue !== '+' && btnValue !== '-' && btnValue !== 'clear' && btnValue !== 'delete') {
+            console.log(typeof (currentNumber) + "Current Number: " + currentNumber);
+            // numberArr.push(currentNumber);
             // console.log(numberArr);
             // ^^^ ADDING NUMBER TO ARRAY AFTER AN OPERATION IS PRESSED
         }
@@ -72,16 +82,21 @@ function setUpEvents(){
         calcDisplay.innerHTML = "";
         numberArr = [];
     }
-
     // DELETE SINGLE PREVIOUS SPACE (BACKSPACE) 
-    function deleteSpace(){
-        // value.substr(0, value.length - 1);
+    function deleteSpace() {
+        let str = calcDisplay.innerHTML;
+        str = str.slice(0, -1);
+        calcDisplay.innerHTML = str;    //??????????WHY???????????? this works
+        console.log(str);
+
+
+        //update array -1
     }
 
 
 
 
-}   
-window.onload = function(){
+}
+window.onload = function () {
     setUpEvents();
 };
