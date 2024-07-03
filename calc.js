@@ -10,7 +10,6 @@ function setUpEvents() {
     // Event listener for button presses
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function () {
         btnValue = this.value;
-        populateDisplay();
 
         switch (btnValue) {
             case 'clear':
@@ -43,25 +42,52 @@ function setUpEvents() {
                 equals();
                 break;
             default:
-                if (!isNaN(btnValue)) {
-                    if (operator !== undefined && operator !== '' && operator !== null) {
-                        clearDisplay();
+
+                // problem here is getNumber reads the display, so it needs to be cleared by the time the 2nd number is being entered to the screen.
+                // 1. First number entered
+                // 2. operator pressed, first number is cleared from screen, operator shown on screen
+                // 3. second number is pressed, operator is cleared, 1st number becomes previous
+                // 4. = is pressed, clear screen, display = sign, new second number is now finalized and operated on with first number
+
+                if (!isNaN(btnValue)) { // check if btn is a number, if true, display btnValue and run getNumber
+                    let displayStr = calcDisplay.innerHTML;
+                    
+                    // if display doesn't include an operator character, display number. else, clear then display number
+                    if (!displayStr.includes('÷') && !displayStr.includes('x') && !displayStr.includes('-') && !displayStr.includes('+')) {
+                        calcDisplay.innerHTML += btnValue;
                         getNumber();
                     } else {
-                        getNumber();
+                        clearDisplay();
+                        calcDisplay.innerHTML += btnValue;
                     }
                 }
         }
         console.log('Button: ' + btnValue);
     }))
 
+    // Populate calc screen with button presses
+    // function populateDisplay() {
 
+    //     if (btnValue == 'clear' || btnValue == 'delete' || btnValue == '=') {
+
+    //         if (currentNumber !== 0 && currentNumber !== undefined) {
+    //             calcDisplay.innerHTML = answer;
+    //             console.log("= " + answer);
+    //         }
+
+    //         calcDisplay.innerHTML = '';
+    //     }
+    // }
 
     function getNumber() {
         currentNumber = parseFloat(calcDisplay.innerHTML);
         console.log('Current Number: ' + currentNumber);
 
+    }
+
+    function updateNumber() {
         // if currentNumber already has a value and an operation or decimal button has been pressed, give previousNumber the currentNumber's value and change currentNumber to = 0
+
         if (currentNumber !== undefined && currentNumber !== '' && operator !== undefined && operator !== '') {
             previousNumber = currentNumber;
             currentNumber = 0;
@@ -72,6 +98,7 @@ function setUpEvents() {
     // Operation Functions
     function divide() {
         answer = (previousNumber / currentNumber);
+        calcDisplay.innerHTML = answer
     }
     function multiply() {
         answer = (previousNumber * currentNumber);
@@ -91,34 +118,16 @@ function setUpEvents() {
         switch (operator) {
             case '/':
                 divide();
-                populateDisplay();
                 break;
             case '*':
                 multiply();
-                populateDisplay();
                 break;
             case '+':
                 add();
-                populateDisplay();
                 break;
             case '-':
                 subtract();
-                populateDisplay();
                 break;
-        }
-    }
-
-
-    // Populate calc screen with button presses
-    function populateDisplay() {
-        if (btnValue !== 'clear' && btnValue !== 'delete' && btnValue !== '=') {
-            calcDisplay.innerHTML += btnValue;
-        }
-        if (btnValue == '=' && currentNumber!== 0 && currentNumber!== undefined) {
-            calcDisplay.innerHTML = answer;
-            console.log("= " + answer);
-        } else{
-            calcDisplay.innerHTML = '';
         }
     }
 
@@ -134,16 +143,6 @@ function setUpEvents() {
         str = str.slice(0, -1);
         calcDisplay.innerHTML = str;
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
