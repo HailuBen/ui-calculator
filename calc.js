@@ -6,6 +6,8 @@ function setUpEvents() {
 
     // Variable to get characters onto calculator screen
     const calcDisplay = document.querySelector('.display-text');
+    // Variable to display an equals sign for calculations
+    const answerBox = document.querySelector('.answer-box');    
 
     // Event listener for button presses
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function () {
@@ -81,15 +83,19 @@ function setUpEvents() {
         switch (operator) {
             case '/':
                 divide();
+                getNumber();
                 break;
             case '*':
                 multiply();
+                getNumber();
                 break;
             case '+':
                 add();
+                getNumber();
                 break;
             case '-':
                 subtract();
+                getNumber();
                 break;
         }
     }
@@ -98,34 +104,40 @@ function setUpEvents() {
     function divide() {
         answer = (previousNumber / currentNumber);
         console.log("prev: "+previousNumber+"\n current: "+currentNumber);
-        calcDisplay.innerHTML = "= "+ answer;
+        answerBox.innerHTML += '=';
+        calcDisplay.innerHTML =  answer;
     }
     function multiply() {
         answer = (previousNumber * currentNumber);
         console.log("prev: "+previousNumber+"\n current: "+currentNumber);
-        calcDisplay.innerHTML = "= "+ answer;
+        answerBox.innerHTML += '=';
+        calcDisplay.innerHTML =  answer;
     }
     function subtract() {
         answer = (previousNumber - currentNumber);
         console.log("prev: "+previousNumber+"\n current: "+currentNumber);
-        calcDisplay.innerHTML = "= "+ answer;
+        answerBox.innerHTML += '=';
+        calcDisplay.innerHTML =  answer;
     }
     function add() {
         answer = (previousNumber + currentNumber);
         console.log("prev: "+previousNumber+"\n current: "+currentNumber);
-        calcDisplay.innerHTML = "= "+ answer;
+        answerBox.innerHTML += '=';
+        calcDisplay.innerHTML =  answer;
     }
 
 
 
     // Clear calc screen 
     function clearDisplay() {
-        calcDisplay.innerHTML = "";
+        answerBox.innerHTML = '';
+        calcDisplay.innerHTML = '';
         currentNumber = 0;
         previousNumber = 0;
     }
     // Delete previous space 
     function deleteSpace() {
+        answerBox.innerHTML = '';
         let str = calcDisplay.innerHTML;
         str = str.slice(0, -1);
         calcDisplay.innerHTML = str;
