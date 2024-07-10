@@ -9,7 +9,10 @@ function setUpEvents() {
 
     // Event listener for button presses
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function () {
-        calcDisplay.innerHTML = ''; //IM GOATED
+        if (isNaN(btnValue) && btnValue !== '.'){
+          calcDisplay.innerHTML = '';  
+        }
+        
         btnValue = this.value;
 
         switch (btnValue) {
@@ -43,15 +46,11 @@ function setUpEvents() {
                 updateNumber();
                 calcDisplay.innerHTML = '-'
                 break;
-            case '.':
-                // operator = '.';
-                decimal();
-                break;
             case '=':
                 equals();
                 break;
             default:
-                if (!isNaN(btnValue)) { // check if btn is a number, if true, display btnValue and run getNumber
+                if (!isNaN(btnValue) || btnValue == '.') { // check if btn is a number or decimal, if true, display btnValue and run getNumber
                     let displayStr = calcDisplay.innerHTML;
 
                     // if display doesn't include an operator character, display number. else, clear then display number
@@ -116,9 +115,7 @@ function setUpEvents() {
         console.log("prev: "+previousNumber+"\n current: "+currentNumber);
         calcDisplay.innerHTML = "= "+ answer;
     }
-    function decimal() {
-        //WIP
-    }
+
 
 
     // Clear calc screen 
