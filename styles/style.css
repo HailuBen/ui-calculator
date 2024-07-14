@@ -66,6 +66,11 @@ main{
     border: 2px solid gray;
     background-color: rgba(189, 255, 238, 0.822);
     border-radius: 5px;
+
+    transition: background-color 500ms ease-in-out;
+    -webkit-transition: background-color 500ms ease-in-out;
+    -o-transition: background-color 500ms ease-in-out; 
+    -moz-transition: background-color 500ms ease-in-out;
 }
 button{
   font-size: 33px; 
