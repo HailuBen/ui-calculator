@@ -5,13 +5,16 @@ function setUpEvents() {
     let currentNumber, previousNumber, answer, roundedAnswer;
     let operatorCounter = 0;
     let decimalCounter = 0;
+    let smallTextCounter = 0;
 
     // Variable to get characters onto calculator screen
     const calcDisplay = document.querySelector('.display-text');
     // Variable to display an equals sign for calculations
-    const answerBox = document.querySelector('.answer-box');
+    const answerBox = document.getElementById('answer');
     // Variable to disable decimal button
     const decimalBtn = document.getElementById('decimal');
+    // Variable to target display-container for when there are too many characters 
+    const displayContainer = document.querySelector('.display-container');
 
 
     // Event listener for button presses
@@ -24,6 +27,9 @@ function setUpEvents() {
 
         btnValue = this.value;
 
+        displayContainer.style.backgroundColor="rgba(189, 255, 238, 0.822)";
+
+        // Switch case statement for button inputs
         switch (btnValue) {
             case 'clear':
                 clearDisplay();
@@ -104,8 +110,19 @@ function setUpEvents() {
                         if (calcDisplay.innerHTML.length <= 14) {
                             calcDisplay.innerHTML += btnValue;
                             getNumber();
-                        }else{
+                        } else {
                             // do something to show user the max character limit
+                            // show a red tint to the answerbox temporarily
+                            if (smallTextCounter < 1){
+                                displayContainer.style.backgroundColor="red";
+                                // add small text 'Max' to answer-box
+                                const smallText = document.createElement("small");
+                                smallText.style.fontSize ="12px";
+                                const textNode = document.createTextNode("Max");
+                                smallText.appendChild(textNode);
+                                answerBox.appendChild(smallText);
+                                smallTextCounter++;
+                            }
                         }
 
                     } else {
@@ -155,27 +172,44 @@ function setUpEvents() {
         answer = (previousNumber / currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
-        calcDisplay.innerHTML = answer;
+        // Round answer if too many chars
+        if (answer.length >= 13) {
+            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
+        } else {
+            calcDisplay.innerHTML = answer;
+        }
     }
     function multiply() {
         answer = (previousNumber * currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
         calcDisplay.innerHTML = answer;
+        // Round answer if too many chars
+        if (answer.length >= 13) {
+            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
+        } else {
+            calcDisplay.innerHTML = answer;
+        }
     }
     function subtract() {
         answer = (previousNumber - currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
         calcDisplay.innerHTML = answer;
+        // Round answer if too many chars
+        if (answer.length >= 13) {
+            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
+        } else {
+            calcDisplay.innerHTML = answer;
+        }
     }
     function add() {
         answer = (previousNumber + currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
-        if (answer.toString().length >= 13) {
-            roundedAnswer = Math.round((answer + Number.EPSILON) * 100) / 100;
-            calcDisplay.innerHTML = roundedAnswer;
+        // Round answer if too many chars
+        if (answer.length >= 13) {
+            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
         } else {
             calcDisplay.innerHTML = answer;
         }
@@ -197,6 +231,7 @@ function setUpEvents() {
         let str = calcDisplay.innerHTML;
         str = str.slice(0, -1);
         calcDisplay.innerHTML = str;
+        getNumber();
     }
 
 
