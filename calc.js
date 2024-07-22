@@ -172,7 +172,6 @@ function setUpEvents() {
         answer = (previousNumber / currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
-        // Round answer if too many chars
         shortenAnswer();
     }
     function multiply() {
@@ -180,7 +179,6 @@ function setUpEvents() {
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
         calcDisplay.innerHTML = answer;
-        // Round answer if too many chars
         shortenAnswer();
     }
     function subtract() {
@@ -188,17 +186,16 @@ function setUpEvents() {
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
         calcDisplay.innerHTML = answer;
-        // Round answer if too many chars
         shortenAnswer();
     }
     function add() {
         answer = (previousNumber + currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
-        // Round answer if too many chars
         shortenAnswer();
     }
 
+    // Round/convert answer to scienftific notation if too many chars    
     function shortenAnswer() {
         if (answer.toString().length >= 14) {
             if (answer > 1000000000000) {   //10 trillion
