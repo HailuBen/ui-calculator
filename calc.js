@@ -27,7 +27,7 @@ function setUpEvents() {
 
         btnValue = this.value;
 
-        displayContainer.style.backgroundColor="rgba(189, 255, 238, 0.822)";
+        displayContainer.style.backgroundColor = "rgba(189, 255, 238, 0.822)";
 
         // Switch case statement for button inputs
         switch (btnValue) {
@@ -107,17 +107,17 @@ function setUpEvents() {
 
                     // if display doesn't include an operator character, display number. else, clear then display number
                     if (!displayStr.includes('÷') && !displayStr.includes('x') && !displayStr.includes('-') && !displayStr.includes('+')) {
-                        if (calcDisplay.innerHTML.length <= 14) {
+                        if (calcDisplay.innerHTML.length <= 13) {
                             calcDisplay.innerHTML += btnValue;
                             getNumber();
                         } else {
                             // do something to show user the max character limit
                             // show a red tint to the answerbox temporarily
-                            if (smallTextCounter < 1){
-                                displayContainer.style.backgroundColor="red";
+                            if (smallTextCounter < 1) {
+                                displayContainer.style.backgroundColor = "red";
                                 // add small text 'Max' to answer-box
                                 const smallText = document.createElement("small");
-                                smallText.style.fontSize ="12px";
+                                smallText.style.fontSize = "12px";
                                 const textNode = document.createTextNode("Max");
                                 smallText.appendChild(textNode);
                                 answerBox.appendChild(smallText);
@@ -173,11 +173,7 @@ function setUpEvents() {
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
         // Round answer if too many chars
-        if (answer.length >= 13) {
-            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
-        } else {
-            calcDisplay.innerHTML = answer;
-        }
+        shortenAnswer();
     }
     function multiply() {
         answer = (previousNumber * currentNumber);
@@ -185,11 +181,7 @@ function setUpEvents() {
         answerBox.innerHTML = '=';
         calcDisplay.innerHTML = answer;
         // Round answer if too many chars
-        if (answer.length >= 13) {
-            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
-        } else {
-            calcDisplay.innerHTML = answer;
-        }
+        shortenAnswer();
     }
     function subtract() {
         answer = (previousNumber - currentNumber);
@@ -197,24 +189,29 @@ function setUpEvents() {
         answerBox.innerHTML = '=';
         calcDisplay.innerHTML = answer;
         // Round answer if too many chars
-        if (answer.length >= 13) {
-            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
-        } else {
-            calcDisplay.innerHTML = answer;
-        }
+        shortenAnswer();
     }
     function add() {
         answer = (previousNumber + currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
         answerBox.innerHTML = '=';
         // Round answer if too many chars
-        if (answer.length >= 13) {
-            calcDisplay.innerHTML = Math.round(answer*100000000) / 100000000;   //🔥🔥🔥
+        shortenAnswer();
+    }
+
+    function shortenAnswer() {
+        if (answer.toString().length >= 14) {
+            if (answer > 1000000000000) {   //10 trillion
+                //scinotation
+                calcDisplay.innerHTML = answer.toExponential(7);
+            } else {
+                //round
+                calcDisplay.innerHTML = Math.round(answer * 100000000) / 100000000;   //🔥🔥🔥
+            }
         } else {
             calcDisplay.innerHTML = answer;
         }
     }
-
 
     // Clear calc screen 
     function clearDisplay() {
