@@ -19,7 +19,7 @@ function setUpEvents() {
 
     // Event listener for button presses
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function () {
-        console.log(calcDisplay.innerHTML.length);
+        // console.log('Length: '+calcDisplay.innerHTML.length);
 
         if (isNaN(btnValue) && btnValue !== '.') {
             calcDisplay.innerHTML = '';
@@ -42,10 +42,19 @@ function setUpEvents() {
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 operator = '/';
-                operatorCounter++;
+                // if current number hasn't had a value yet the user has pressed an operator first, increasing counter in this case is unnecessary
+                if (currentNumber !== undefined) {
+                    operatorCounter++;
+                }
+
                 console.log("Operator " + operatorCounter + ": " + operator);
                 if (operatorCounter <= 1) { //if this counter is greater than 1, it means multiple operations have been pressed consecutively and it will only calculate using the most recent operator selection.
                     updateNumber();
+                }
+                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
+                    console.log('hi')
+                    equals();
+                    previousNumber = answer;
                 }
 
                 calcDisplay.innerHTML = '÷'
@@ -55,10 +64,18 @@ function setUpEvents() {
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 operator = '*';
-                operatorCounter++;
+                if (currentNumber !== undefined) {
+                    operatorCounter++;
+                }
+
                 console.log("Operator " + operatorCounter + ": " + operator);
                 if (operatorCounter <= 1) {
                     updateNumber();
+                }
+                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
+                    console.log('hi')
+                    equals();
+                    previousNumber = answer;
                 }
 
                 calcDisplay.innerHTML = 'x'
@@ -68,10 +85,18 @@ function setUpEvents() {
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 operator = '+';
-                operatorCounter++;
+                if (currentNumber !== undefined){
+                    operatorCounter++;
+                }
+
                 console.log("Operator " + operatorCounter + ": " + operator);
                 if (operatorCounter <= 1) {
                     updateNumber();
+                }
+                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
+                    console.log('hi')
+                    equals();
+                    previousNumber = answer;
                 }
 
                 calcDisplay.innerHTML = '+'
@@ -81,16 +106,27 @@ function setUpEvents() {
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 operator = '-';
-                operatorCounter++;
+                if (currentNumber !== undefined){
+                    operatorCounter++;
+                }
+
                 console.log("Operator " + operatorCounter + ": " + operator);
                 if (operatorCounter <= 1) {
                     updateNumber();
+                } 
+                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
+                    console.log('hi')
+                    equals();
+                    previousNumber = answer;
                 }
 
                 calcDisplay.innerHTML = '-'
                 break;
             case '=':
                 equals();
+                displayAnswer();
+                shortenAnswer();
+                getNumber();
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 operatorCounter = 0; //reset
@@ -130,7 +166,7 @@ function setUpEvents() {
                         calcDisplay.innerHTML += btnValue;
                     }
                 }
-                console.log('Button: ' + btnValue);
+                //console.log('Button: ' + btnValue);
 
         }
     }))
@@ -151,27 +187,19 @@ function setUpEvents() {
         switch (operator) {
             case '/':
                 divide();
-                displayAnswer();
-                shortenAnswer();
-                getNumber();
+
                 break;
             case '*':
                 multiply();
-                displayAnswer();
-                shortenAnswer();
-                getNumber();
+
                 break;
             case '+':
                 add();
-                displayAnswer();
-                shortenAnswer();
-                getNumber();
+
                 break;
             case '-':
                 subtract();
-                displayAnswer();
-                shortenAnswer();
-                getNumber();
+                
                 break;
         }
     }
@@ -179,19 +207,19 @@ function setUpEvents() {
     // Operation Functions
     function divide() {
         answer = (previousNumber / currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber);
+        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
     }
     function multiply() {
         answer = (previousNumber * currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber);
+        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
     }
     function add() {
         answer = (previousNumber + currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber);        
+        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
     }
     function subtract() {
         answer = (previousNumber - currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber);
+        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
     }
 
     // Round/convert answer to scienftific notation if too many chars    
@@ -210,7 +238,7 @@ function setUpEvents() {
     }
 
     // Show answer on screen
-    function displayAnswer(){
+    function displayAnswer() {
         answerBox.innerHTML = '=';
         calcDisplay.innerHTML = answer;
     }
