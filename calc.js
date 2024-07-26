@@ -2,7 +2,7 @@ function setUpEvents() {
 
     // Global Variables
     let btnValue, operator;
-    let currentNumber, previousNumber, answer, roundedAnswer;
+    let currentNumber, previousNumber, answer;
     let operatorCounter = 0;
     let decimalCounter = 0;
     let smallTextCounter = 0;
@@ -135,11 +135,12 @@ function setUpEvents() {
         }
     }))
 
-
+    // Parse number from the html display box
     function getNumber() {
         currentNumber = parseFloat(calcDisplay.innerHTML);
         console.log('Current Number: ' + currentNumber);
     }
+    // Update number variables values 
     function updateNumber() {
         previousNumber = parseFloat(currentNumber);
         currentNumber = 0;
@@ -150,18 +151,26 @@ function setUpEvents() {
         switch (operator) {
             case '/':
                 divide();
+                displayAnswer();
+                shortenAnswer();
                 getNumber();
                 break;
             case '*':
                 multiply();
+                displayAnswer();
+                shortenAnswer();
                 getNumber();
                 break;
             case '+':
                 add();
+                displayAnswer();
+                shortenAnswer();
                 getNumber();
                 break;
             case '-':
                 subtract();
+                displayAnswer();
+                shortenAnswer();
                 getNumber();
                 break;
         }
@@ -171,28 +180,18 @@ function setUpEvents() {
     function divide() {
         answer = (previousNumber / currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
-        answerBox.innerHTML = '=';
-        shortenAnswer();
     }
     function multiply() {
         answer = (previousNumber * currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
-        answerBox.innerHTML = '=';
-        calcDisplay.innerHTML = answer;
-        shortenAnswer();
+    }
+    function add() {
+        answer = (previousNumber + currentNumber);
+        console.log("prev: " + previousNumber + "\n current: " + currentNumber);        
     }
     function subtract() {
         answer = (previousNumber - currentNumber);
         console.log("prev: " + previousNumber + "\n current: " + currentNumber);
-        answerBox.innerHTML = '=';
-        calcDisplay.innerHTML = answer;
-        shortenAnswer();
-    }
-    function add() {
-        answer = (previousNumber + currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber);
-        answerBox.innerHTML = '=';
-        shortenAnswer();
     }
 
     // Round/convert answer to scienftific notation if too many chars    
@@ -208,6 +207,12 @@ function setUpEvents() {
         } else {
             calcDisplay.innerHTML = answer;
         }
+    }
+
+    // Show answer on screen
+    function displayAnswer(){
+        answerBox.innerHTML = '=';
+        calcDisplay.innerHTML = answer;
     }
 
     // Clear calc screen 
