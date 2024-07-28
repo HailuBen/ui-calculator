@@ -32,13 +32,13 @@ function setUpEvents() {
         displayContainer.style.backgroundColor = "rgba(189, 255, 238, 0.822)";
 
         //chaining operations
-        if (btnValue === '/' || btnValue === '*' || btnValue === '+' || btnValue === '-'){
-            if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== ''){
+        if (btnValue === '/' || btnValue === '*' || btnValue === '+' || btnValue === '-') {
+            if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== '') {
                 equals();
-                console.log("Hello: "+currentNumber+' '+operator+' '+previousNumber);
+                console.log("Hello: " + currentNumber + ' ' + operator + ' ' + previousNumber);
                 console.log(answer);
                 previousNumber = answer;
-                answer = 0; 
+                answer = 0;
                 operatorCounter++;
             }
         }
@@ -57,10 +57,11 @@ function setUpEvents() {
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
 
-                if (operatorCounter < 1){
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
+                operatorCounter++;
                 calcDisplay.innerHTML = '÷'
                 break;
 
@@ -70,10 +71,11 @@ function setUpEvents() {
                 decimalBtn.disabled = false;
                 operator = '*';
 
-                if (operatorCounter < 1){
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
+                operatorCounter++;
                 calcDisplay.innerHTML = 'x'
                 break;
 
@@ -83,10 +85,11 @@ function setUpEvents() {
                 decimalBtn.disabled = false;
                 operator = '+';
 
-                if (operatorCounter < 1){
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
+                operatorCounter++;
                 calcDisplay.innerHTML = '+'
                 break;
 
@@ -96,23 +99,27 @@ function setUpEvents() {
                 decimalBtn.disabled = false;
                 operator = '-';
 
-                if (operatorCounter < 1){
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
+                operatorCounter++;
                 calcDisplay.innerHTML = '-'
                 break;
 
             case '=':
-                equals();
-                if (answer.toString().length >= 14) {
-                    shortenAnswer();
+                if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== '') {
+                    console.log("= case");
+                    equals();
+                    if (answer.toString().length >= 14) {
+                        shortenAnswer();
+                    }
+                    displayAnswer();
+                    getNumber();
+                    decimalCounter = 0;
+                    decimalBtn.disabled = false;
+                    operatorCounter = 0;
                 }
-                displayAnswer();
-                getNumber();
-                decimalCounter = 0;
-                decimalBtn.disabled = false;
-                operatorCounter = 0;
                 break;
 
             default:
@@ -214,10 +221,10 @@ function setUpEvents() {
 
     // Show answer on screen
     function displayAnswer() {
-        if (answer !== Infinity) {
+        if (answer !== Infinity && answer !== undefined) {
             answerBox.innerHTML = '=';
             calcDisplay.innerHTML = answer;
-        } else {
+        } else if (answer === Infinity) {
             // Show error text for divide by zero
             console.log('(dsplyAnsw) uh oh!');
             const errorText = document.createElement("small");
@@ -225,7 +232,9 @@ function setUpEvents() {
             const textNode = document.createTextNode("uh oh! ÷ by 0 error!");
             errorText.appendChild(textNode);
             answerBox.appendChild(errorText);
-            // calcDisplay.innerHTML = '';
+        }
+        else if (answer === undefined) {
+            console.log('Answer is undefined');
         }
     }
 
