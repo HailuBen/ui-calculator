@@ -1,0 +1,6 @@
+PROBLEM: Chaining operations fix (doesn't perform them in correct order)
+	- previous and current operators possible solution
+SOLVED: if statement before event listener switchcase (line 35)
+
+
+PROBLEM: Unexpected result occurs after user enters a number then an operator then the equals sign
