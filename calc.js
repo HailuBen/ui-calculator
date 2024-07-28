@@ -1,7 +1,7 @@
 function setUpEvents() {
 
     // Global Variables
-    let btnValue, operator;
+    let btnValue, previousOperator, currentOperator;
     let currentNumber, previousNumber, answer;
     let operatorCounter = 0;
     let decimalCounter = 0;
@@ -19,7 +19,11 @@ function setUpEvents() {
 
     // Event listener for button presses
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function () {
-        // console.log('Length: '+calcDisplay.innerHTML.length);
+        if (currentNumber !== undefined) {
+            console.log('Values:\ncurrentNumber: ' + currentNumber + '\npreviousNumber: ' + previousNumber + '\ncurrentOperator: ' + currentOperator);
+
+            console.log('Counters:\noperatorCounter: ' + operatorCounter + ' || decimalCounter: ' + decimalCounter);
+        }
 
         if (isNaN(btnValue) && btnValue !== '.') {
             calcDisplay.innerHTML = '';
@@ -41,21 +45,26 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                operator = '/';
-                // if current number hasn't had a value yet the user has pressed an operator first, increasing counter in this case is unnecessary
+                currentOperator = '/';
+
+                // if current number hasn't had a value yet the user has pressed an operator first, increasing counter is unnecessary
                 if (currentNumber !== undefined) {
                     operatorCounter++;
                 }
 
-                console.log("Operator " + operatorCounter + ": " + operator);
-                if (operatorCounter <= 1) { //if this counter is greater than 1, it means multiple operations have been pressed consecutively and it will only calculate using the most recent operator selection.
+                console.log("(÷ case) Current Operator " + operatorCounter + ": " + currentOperator);
+                //if this counter is greater than 1, it means multiple operations have been pressed consecutively and it will only calculate using the most recent operator selection.
+                if (operatorCounter <= 1) { 
                     updateNumber();
                 }
-                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
-                    console.log('hi')
-                    equals();
-                    previousNumber = answer;
-                }
+
+                // if (currentNumber !== undefined && previousNumber !== undefined && operatorCounter > 1) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
+                //     console.log('hi')
+                //     previousOperator = currentOperator;
+                //     currentOperator = '';
+                //     equals();
+                //     previousNumber = answer;
+                // }
 
                 calcDisplay.innerHTML = '÷'
                 break;
@@ -63,19 +72,14 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                operator = '*';
+                currentOperator = '*';
                 if (currentNumber !== undefined) {
                     operatorCounter++;
                 }
-
-                console.log("Operator " + operatorCounter + ": " + operator);
+                console.log("(x case) Current Operator " + operatorCounter + ": " + currentOperator);
+                
                 if (operatorCounter <= 1) {
                     updateNumber();
-                }
-                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
-                    console.log('hi')
-                    equals();
-                    previousNumber = answer;
                 }
 
                 calcDisplay.innerHTML = 'x'
@@ -84,19 +88,14 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                operator = '+';
-                if (currentNumber !== undefined){
+                currentOperator = '+';
+                if (currentNumber !== undefined) {
                     operatorCounter++;
                 }
-
-                console.log("Operator " + operatorCounter + ": " + operator);
+                console.log("(+ case) Current Operator " + operatorCounter + ": " + currentOperator);
+                
                 if (operatorCounter <= 1) {
                     updateNumber();
-                }
-                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
-                    console.log('hi')
-                    equals();
-                    previousNumber = answer;
                 }
 
                 calcDisplay.innerHTML = '+'
@@ -105,27 +104,24 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                operator = '-';
-                if (currentNumber !== undefined){
+                currentOperator = '-';
+                if (currentNumber !== undefined) {
                     operatorCounter++;
                 }
-
-                console.log("Operator " + operatorCounter + ": " + operator);
+                console.log("(- case) Current Operator " + operatorCounter + ": " + currentOperator);
+                
                 if (operatorCounter <= 1) {
                     updateNumber();
-                } 
-                if (currentNumber !== undefined && previousNumber !== undefined) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
-                    console.log('hi')
-                    equals();
-                    previousNumber = answer;
                 }
 
                 calcDisplay.innerHTML = '-'
                 break;
             case '=':
                 equals();
+                if (answer.toString().length >= 14) {
+                    shortenAnswer();
+                }
                 displayAnswer();
-                shortenAnswer();
                 getNumber();
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
@@ -166,7 +162,7 @@ function setUpEvents() {
                         calcDisplay.innerHTML += btnValue;
                     }
                 }
-                //console.log('Button: ' + btnValue);
+            //console.log('Button: ' + btnValue);
 
         }
     }))
@@ -174,7 +170,7 @@ function setUpEvents() {
     // Parse number from the html display box
     function getNumber() {
         currentNumber = parseFloat(calcDisplay.innerHTML);
-        console.log('Current Number: ' + currentNumber);
+        console.log('(getNum) Current Number: ' + currentNumber);
     }
     // Update number variables values 
     function updateNumber() {
@@ -184,7 +180,7 @@ function setUpEvents() {
 
     // Function to execute operation & send answer to calc display screen 
     function equals() {
-        switch (operator) {
+        switch (currentOperator) {
             case '/':
                 divide();
 
@@ -199,7 +195,7 @@ function setUpEvents() {
                 break;
             case '-':
                 subtract();
-                
+
                 break;
         }
     }
@@ -207,40 +203,49 @@ function setUpEvents() {
     // Operation Functions
     function divide() {
         answer = (previousNumber / currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
+        console.log("(div) prev: " + previousNumber + "\n current: " + currentNumber + "\n = " + answer);
     }
     function multiply() {
         answer = (previousNumber * currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
+        console.log("(mult) prev: " + previousNumber + "\n current: " + currentNumber + "\n = " + answer);
     }
     function add() {
         answer = (previousNumber + currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
+        console.log("(add) prev: " + previousNumber + "\n current: " + currentNumber + "\n = " + answer);
     }
     function subtract() {
         answer = (previousNumber - currentNumber);
-        console.log("prev: " + previousNumber + "\n current: " + currentNumber + "\n = "+answer);
+        console.log("(sub) prev: " + previousNumber + "\n current: " + currentNumber + "\n = " + answer);
     }
 
     // Round/convert answer to scienftific notation if too many chars    
     function shortenAnswer() {
-        if (answer.toString().length >= 14) {
-            if (answer > 1000000000000) {   //10 trillion
-                //scinotation
-                calcDisplay.innerHTML = answer.toExponential(7);
-            } else {
-                //round
-                calcDisplay.innerHTML = Math.round(answer * 100000000) / 100000000;   //🔥🔥🔥
-            }
+        if (answer > 1000000000000) {   //10 trillion
+            //scinotation
+            calcDisplay.innerHTML = answer.toExponential(7);
         } else {
-            calcDisplay.innerHTML = answer;
+            //round
+            calcDisplay.innerHTML = Math.round(answer * 100000000) / 100000000;   //🔥🔥🔥
         }
+
     }
 
     // Show answer on screen
     function displayAnswer() {
-        answerBox.innerHTML = '=';
-        calcDisplay.innerHTML = answer;
+        if (answer !== Infinity) {
+            answerBox.innerHTML = '=';
+            calcDisplay.innerHTML = answer;
+        } else {
+            // Show error text for divide by zero
+            console.log('(dsplyAnsw) uh oh!');
+            const errorText = document.createElement("small");
+            errorText.style.fontSize = "12px";
+            const textNode = document.createTextNode("uh oh! ÷ by 0 error!");
+            errorText.appendChild(textNode);
+            answerBox.appendChild(errorText);
+            // calcDisplay.innerHTML = '';
+        }
+
     }
 
     // Clear calc screen 
