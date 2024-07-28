@@ -41,6 +41,7 @@ function setUpEvents() {
             case 'delete':
                 deleteSpace();
                 break;
+
             case '/':
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
@@ -50,6 +51,7 @@ function setUpEvents() {
                 // if current number hasn't had a value yet the user has pressed an operator first, increasing counter is unnecessary
                 if (currentNumber !== undefined) {
                     operatorCounter++;
+                    currentOperator = '/';
                 }
 
                 console.log("(÷ case) Current Operator " + operatorCounter + ": " + currentOperator);
@@ -68,14 +70,17 @@ function setUpEvents() {
 
                 calcDisplay.innerHTML = '÷'
                 break;
+
             case '*':
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 currentOperator = '*';
+
                 if (currentNumber !== undefined) {
                     operatorCounter++;
                 }
+
                 console.log("(x case) Current Operator " + operatorCounter + ": " + currentOperator);
                 
                 if (operatorCounter <= 1) {
@@ -84,14 +89,17 @@ function setUpEvents() {
 
                 calcDisplay.innerHTML = 'x'
                 break;
+
             case '+':
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 currentOperator = '+';
+
                 if (currentNumber !== undefined) {
                     operatorCounter++;
                 }
+
                 console.log("(+ case) Current Operator " + operatorCounter + ": " + currentOperator);
                 
                 if (operatorCounter <= 1) {
@@ -100,14 +108,17 @@ function setUpEvents() {
 
                 calcDisplay.innerHTML = '+'
                 break;
+
             case '-':
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
                 currentOperator = '-';
+
                 if (currentNumber !== undefined) {
                     operatorCounter++;
                 }
+                
                 console.log("(- case) Current Operator " + operatorCounter + ": " + currentOperator);
                 
                 if (operatorCounter <= 1) {
@@ -116,6 +127,7 @@ function setUpEvents() {
 
                 calcDisplay.innerHTML = '-'
                 break;
+
             case '=':
                 equals();
                 if (answer.toString().length >= 14) {
@@ -127,6 +139,7 @@ function setUpEvents() {
                 decimalBtn.disabled = false;
                 operatorCounter = 0; //reset
                 break;
+
             default:
                 if (!isNaN(btnValue) || btnValue == '.') { // check if btn is a number or decimal, if true, display btnValue and run getNumber
                     if (btnValue == '.') {
