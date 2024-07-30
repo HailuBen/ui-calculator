@@ -10,7 +10,6 @@ body{
 }
 main{
     display: inline-block;
-    background-color: rgb(185, 118, 248);
     
     width: fit-content;
     margin: 5% 0;
@@ -36,10 +35,6 @@ main{
 
 /* |CALCULATOR| */
 .calc-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
     padding: 10px;
     padding-bottom: 16px;
 
@@ -47,22 +42,35 @@ main{
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: 2px 1px 5px;
+    width: 100%;
 }
-.display-container{
+
+#answer{
+    padding-right: 1em;
+}
+.display-container{   
+    display: flex;
+    justify-content: flex-end;
     text-align: right;
 
     font-size: 33px; 
     font-family: 'Courier New', Courier, monospace;
     font-weight: 600;
 
-    width: 282px;
-    height: 44px;
+    /* width: 282px; */
+    height: 51px;
 
     padding: 10px 10px 0;
     margin: 9px;
 
     border: 2px solid gray;
+    background-color: rgba(189, 255, 238, 0.822);
     border-radius: 5px;
+
+    transition: background-color 500ms ease-in-out;
+    -webkit-transition: background-color 500ms ease-in-out;
+    -o-transition: background-color 500ms ease-in-out; 
+    -moz-transition: background-color 500ms ease-in-out;
 }
 button{
   font-size: 33px; 
@@ -73,14 +81,18 @@ button{
 
   background-color: white;
   border-radius: 5px;
-  border: 1px solid rgb(211, 211, 211);
+  border: 3px solid rgb(211, 211, 211);
 
   cursor: pointer;
-  transition:background-color .2s;
+
+  transition: .3s;
+  -webkit-transition: .3s;
+  -o-transition: .3s; 
+  -moz-transition: .3s;
 }
 button:hover{
     background-color: rgb(211, 211, 211);
-    border-color: rgb(211, 211, 211);
+    border-color: rgb(226, 226, 226);
 }
 button:active{
     transform: translateY(2px);
@@ -88,9 +100,29 @@ button:active{
 }
 .buttons-container{
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1.5fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     
     gap: 9px;
     padding: 0 10px;
 } 
+
+/* Makes Clear button the size oof 2 bbutton */
+.buttons-container>:first-of-type{   
+    grid-column: span 2;
+}
+.buttons-container>:first-of-type:hover{   
+    background-color: rgba(245, 152, 157, 0.616);
+    border-color: rgb(226, 226, 226);
+    border: 3px solid rgba(177, 110, 114, 0.616);
+}
+
+/* Makes equals button the size of 2 buttons */
+.buttons-container>:nth-last-of-type(1){   
+    grid-column: span 2;
+    background-color: rgb(40, 241, 255);
+    border: 3px solid white;
+}
+.buttons-container>:nth-last-of-type(1):hover{   
+    background-color: rgb(32, 193, 204);
+    border-color: rgb(226, 226, 226);
+}
