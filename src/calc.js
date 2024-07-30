@@ -1,11 +1,14 @@
 function setUpEvents() {
 
+    console.log("Test");
+    // console.log(!isNaN(''));
+
     // Global Variables
-    let btnValue, previousOperator, currentOperator;
+    let btnValue, operator;
     let currentNumber, previousNumber, answer;
-    let operatorCounter = 0;
     let decimalCounter = 0;
     let smallTextCounter = 0;
+    let operatorCounter = 0;
 
     // Variable to get characters onto calculator screen
     const calcDisplay = document.querySelector('.display-text');
@@ -19,11 +22,6 @@ function setUpEvents() {
 
     // Event listener for button presses
     document.querySelectorAll('button').forEach(ele => ele.addEventListener('click', function () {
-        if (currentNumber !== undefined) {
-            console.log('Values:\ncurrentNumber: ' + currentNumber + '\npreviousNumber: ' + previousNumber + '\ncurrentOperator: ' + currentOperator);
-
-            console.log('Counters:\noperatorCounter: ' + operatorCounter + ' || decimalCounter: ' + decimalCounter);
-        }
 
         if (isNaN(btnValue) && btnValue !== '.') {
             calcDisplay.innerHTML = '';
@@ -33,6 +31,19 @@ function setUpEvents() {
 
         displayContainer.style.backgroundColor = "rgba(189, 255, 238, 0.822)";
 
+        //chaining operations
+        if (operatorCounter >= 1) {
+            if (btnValue === '/' || btnValue === '*' || btnValue === '+' || btnValue === '-') {
+                if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== '') {
+                    equals();
+                    console.log("Hello: " + currentNumber + ' ' + operator + ' ' + previousNumber);
+                    console.log(answer);
+                    previousNumber = answer;
+                    // answer = 0;
+                    operatorCounter++;
+                }
+            }
+        }
         // Switch case statement for button inputs
         switch (btnValue) {
             case 'clear':
@@ -46,28 +57,12 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                currentOperator = '/';
 
-                // if current number hasn't had a value yet the user has pressed an operator first, increasing counter is unnecessary
-                if (currentNumber !== undefined) {
-                    operatorCounter++;
-                    currentOperator = '/';
-                }
-
-                console.log("(÷ case) Current Operator " + operatorCounter + ": " + currentOperator);
-                //if this counter is greater than 1, it means multiple operations have been pressed consecutively and it will only calculate using the most recent operator selection.
-                if (operatorCounter <= 1) { 
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
-                // if (currentNumber !== undefined && previousNumber !== undefined && operatorCounter > 1) { // WARNING: This could be problem if dumb user enters number then 2 or more operators, fix that
-                //     console.log('hi')
-                //     previousOperator = currentOperator;
-                //     currentOperator = '';
-                //     equals();
-                //     previousNumber = answer;
-                // }
-
+                operatorCounter++;
                 calcDisplay.innerHTML = '÷'
                 break;
 
@@ -75,18 +70,13 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                currentOperator = '*';
+                operator = '*';
 
-                if (currentNumber !== undefined) {
-                    operatorCounter++;
-                }
-
-                console.log("(x case) Current Operator " + operatorCounter + ": " + currentOperator);
-                
-                if (operatorCounter <= 1) {
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
+                operatorCounter++;
                 calcDisplay.innerHTML = 'x'
                 break;
 
@@ -94,18 +84,13 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                currentOperator = '+';
+                operator = '+';
 
-                if (currentNumber !== undefined) {
-                    operatorCounter++;
-                }
-
-                console.log("(+ case) Current Operator " + operatorCounter + ": " + currentOperator);
-                
-                if (operatorCounter <= 1) {
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
+                operatorCounter++;
                 calcDisplay.innerHTML = '+'
                 break;
 
@@ -113,31 +98,33 @@ function setUpEvents() {
                 answerBox.innerHTML = '';
                 decimalCounter = 0;
                 decimalBtn.disabled = false;
-                currentOperator = '-';
+                operator = '-';
 
-                if (currentNumber !== undefined) {
-                    operatorCounter++;
-                }
-                
-                console.log("(- case) Current Operator " + operatorCounter + ": " + currentOperator);
-                
-                if (operatorCounter <= 1) {
+                if (operatorCounter < 1) {
                     updateNumber();
                 }
 
+                operatorCounter++;
                 calcDisplay.innerHTML = '-'
                 break;
 
             case '=':
-                equals();
-                if (answer.toString().length >= 14) {
-                    shortenAnswer();
+                if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== '') {
+                    console.log("= case");
+                    equals();
+                    if (answer.toString().length >= 14) {
+                        shortenAnswer();
+                    }
+                    displayAnswer();
+                    // updateNumber();
+                    answer = 0;
+                    getNumber();
+                    decimalCounter = 0;
+                    decimalBtn.disabled = false;
+                    operatorCounter = 0;
+
+                    console.log(`${currentNumber} ${operator} ${previousNumber} \n${answer}`);
                 }
-                displayAnswer();
-                getNumber();
-                decimalCounter = 0;
-                decimalBtn.disabled = false;
-                operatorCounter = 0; //reset
                 break;
 
             default:
@@ -169,14 +156,12 @@ function setUpEvents() {
                                 smallTextCounter++;
                             }
                         }
-
                     } else {
                         clearDisplay();
                         calcDisplay.innerHTML += btnValue;
                     }
                 }
             //console.log('Button: ' + btnValue);
-
         }
     }))
 
@@ -193,22 +178,18 @@ function setUpEvents() {
 
     // Function to execute operation & send answer to calc display screen 
     function equals() {
-        switch (currentOperator) {
+        switch (operator) {
             case '/':
                 divide();
-
                 break;
             case '*':
                 multiply();
-
                 break;
             case '+':
                 add();
-
                 break;
             case '-':
                 subtract();
-
                 break;
         }
     }
@@ -245,10 +226,10 @@ function setUpEvents() {
 
     // Show answer on screen
     function displayAnswer() {
-        if (answer !== Infinity) {
+        if (answer !== Infinity && answer !== undefined) {
             answerBox.innerHTML = '=';
             calcDisplay.innerHTML = answer;
-        } else {
+        } else if (answer === Infinity) {
             // Show error text for divide by zero
             console.log('(dsplyAnsw) uh oh!');
             const errorText = document.createElement("small");
@@ -256,9 +237,10 @@ function setUpEvents() {
             const textNode = document.createTextNode("uh oh! ÷ by 0 error!");
             errorText.appendChild(textNode);
             answerBox.appendChild(errorText);
-            // calcDisplay.innerHTML = '';
         }
-
+        else if (answer === undefined) {
+            console.log('Answer is undefined');
+        }
     }
 
     // Clear calc screen 
@@ -269,6 +251,8 @@ function setUpEvents() {
         previousNumber = 0;
         decimalCounter = 0;
         decimalBtn.disabled = false;
+        operatorCounter = 0;
+        answer = 0;
     }
     // Delete previous space 
     function deleteSpace() {
