@@ -32,17 +32,18 @@ function setUpEvents() {
         displayContainer.style.backgroundColor = "rgba(189, 255, 238, 0.822)";
 
         //chaining operations
-        if (btnValue === '/' || btnValue === '*' || btnValue === '+' || btnValue === '-') {
-            if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== '') {
-                equals();
-                console.log("Hello: " + currentNumber + ' ' + operator + ' ' + previousNumber);
-                console.log(answer);
-                previousNumber = answer;
-                answer = 0;
-                operatorCounter++;
+        if (operatorCounter >= 1) {
+            if (btnValue === '/' || btnValue === '*' || btnValue === '+' || btnValue === '-') {
+                if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== '') {
+                    equals();
+                    console.log("Hello: " + currentNumber + ' ' + operator + ' ' + previousNumber);
+                    console.log(answer);
+                    previousNumber = answer;
+                    // answer = 0;
+                    operatorCounter++;
+                }
             }
         }
-
         // Switch case statement for button inputs
         switch (btnValue) {
             case 'clear':
@@ -115,10 +116,14 @@ function setUpEvents() {
                         shortenAnswer();
                     }
                     displayAnswer();
+                    // updateNumber();
+                    answer = 0;
                     getNumber();
                     decimalCounter = 0;
                     decimalBtn.disabled = false;
                     operatorCounter = 0;
+
+                    console.log(`${currentNumber} ${operator} ${previousNumber} \n${answer}`);
                 }
                 break;
 

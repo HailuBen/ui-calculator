@@ -4,3 +4,7 @@ SOLVED: if statement before event listener switchcase (line 35)
 
 
 PROBLEM: Unexpected result occurs after user enters a number then an operator then the equals sign
+SOLVED: ?
+
+PROBLEM: Incorrect calculations after equals btn pressed
+SOLVED: added if (operatorCounter >= 1)
