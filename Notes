@@ -4,7 +4,12 @@ SOLVED: if statement before event listener switchcase (line 35)
 
 
 PROBLEM: Unexpected result occurs after user enters a number then an operator then the equals sign
-SOLVED: ?
+SOLVED: ?Problem not recreatable
 
 PROBLEM: Incorrect calculations after equals btn pressed
 SOLVED: added if (operatorCounter >= 1)
+
+PROBLEM: Calculations after equals sign not following BEDMAS/Order of operations
+	- e.x. 5-2=3-2*4 --> should =-5, calc shows =4
+	- Difficult because prev and current strategy doesn't account for an operation that has precedence over the previous one, it will always get the answer before the equals sign is pressed.
+	- A lot of the Odin calculators I looked at have this problem.
