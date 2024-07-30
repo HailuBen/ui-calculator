@@ -37,7 +37,7 @@ function setUpEvents() {
                 if (!isNaN(currentNumber) && !isNaN(previousNumber) && currentNumber !== '' && previousNumber !== '') {
                     equals();
                     console.log("Hello: " + currentNumber + ' ' + operator + ' ' + previousNumber);
-                    console.log(answer);
+                    console.log(`${currentNumber} ${operator} ${previousNumber} \n${answer}`);
                     previousNumber = answer;
                     // answer = 0;
                     operatorCounter++;
